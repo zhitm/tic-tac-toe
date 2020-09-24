@@ -7,18 +7,17 @@ SCREEN_X = 1000
 SCREEN_Y = 1000
 screen = pygame.display.set_mode((SCREEN_X, SCREEN_Y))
 screen.fill((100, 150, 200))
-offset_x = 100
-offset_y = 100
+
 
 class Main():
 	def __init__(self):
-		self.board = Board(4, 4, offset_x, offset_y)
+		self.board = Board(4, 4)
 		self.game_is_not_over = True
 
 	def click(self, coord):
 		click_x, click_y = coord
-		rect_x = (click_x - offset_x)//self.board.cell_x
-		rect_y = (click_y - offset_y)//self.board.cell_y
+		rect_x = (click_x - self.board.offset_x)//self.board.cell_x
+		rect_y = (click_y - self.board.offset_y)//self.board.cell_y
 		if rect_x < self.board.x and rect_y < self.board.y:
 			if self.board.cells[rect_y][rect_x] == 0:
 				self.move(rect_x, rect_y)

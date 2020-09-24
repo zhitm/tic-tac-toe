@@ -1,13 +1,13 @@
 import pygame
 class Board:
-	def __init__(self, x, y, offset_x, offset_y):
+	def __init__(self, x, y):
 		self.x = x
 		self.y = y
 		self.cells =[ [0 for i in range(x)] for i in range(y)]
 		self.cell_x = 200
 		self.cell_y = 200
-		self.offset_x = offset_x
-		self.offset_y = offset_y
+		self.offset_x = 100
+		self.offset_y = 100
 		self.gamer = 'null'
 
 	def draw(self, screen):

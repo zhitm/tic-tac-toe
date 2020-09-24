@@ -11,15 +11,19 @@ class Board:
 		self.gamer = 'null'
 
 	def draw(self, screen):
+		X = self.cell_x
+		Y = self.cell_y
 		print(self.cells)
 		for i in range(self.y):
 			for j in range(self.x):
-				pygame.draw.rect(screen, (255, 255, 255), (self.cell_x*j+self.offset_x, self.cell_y*i+self.offset_y, self.cell_x-10, self.cell_y-10))
+				pygame.draw.rect(screen, (255, 255, 255), (X*j+self.offset_x, Y*i+self.offset_y, X-10, Y-10))
 				if self.cells[i][j] == 'o':
-					pygame.draw.circle(screen, (255, 0, 0), (self.cell_x*j+ self.offset_x + self.cell_x//2 - 5, self.cell_y*i+100 + self.cell_y//2 -5), self.cell_x//2 - 20, 10)
+					pygame.draw.circle(screen, (255, 0, 0), (X*j+ self.offset_x + X//2 - 5, Y*i+100 + Y//2 -5), X//2 - 20, 10)
 				elif self.cells[i][j] == 'x':
-					pygame.draw.line(screen, (255, 0, 0),  [self.cell_x*j+self.offset_x, self.cell_y*i+self.offset_y], [self.cell_x*(j+1)+self.offset_x-10, self.cell_y*(i+1)+self.offset_y-10], 10)
-					pygame.draw.line(screen, (255, 0, 0),  [self.cell_x*(j+1)+self.offset_x-10, self.cell_y*i+self.offset_y], [self.cell_x*j+self.offset_x, self.cell_y*(i+1)+self.offset_y-10], 10)
+					pygame.draw.line(screen, (255, 0, 0),  [X*j+self.offset_x, Y*i+self.offset_y],
+									 [X*(j+1)+self.offset_x-10, Y*(i+1)+self.offset_y-10], 10)
+					pygame.draw.line(screen, (255, 0, 0),  [self.cell_x*(j+1)+self.offset_x-10, self.cell_y*i+self.offset_y],
+									 [X*j+self.offset_x, Y*(i+1)+self.offset_y-10], 10)
 
 	def are_3_in_line(self):
 		if self.gamer == 'null':

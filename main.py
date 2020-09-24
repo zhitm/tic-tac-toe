@@ -7,7 +7,6 @@ SCREEN_X = 1000
 SCREEN_Y = 1000
 screen = pygame.display.set_mode((SCREEN_X, SCREEN_Y))
 screen.fill((100, 150, 200))
-game_is_not_over = True
 offset_x = 100
 offset_y = 100
 

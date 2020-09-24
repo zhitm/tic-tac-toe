@@ -15,21 +15,23 @@ class Main():
 		self.board = Board(4, 4, offset_x, offset_y)
 		self.game_is_not_over = True
 
-	def click(self, event):
-		click_x, click_y = event.pos
+	def click(self, coord):
+		click_x, click_y = coord
 		rect_x = (click_x - offset_x)//self.board.cell_x
 		rect_y = (click_y - offset_y)//self.board.cell_y
 		if rect_x < self.board.x and rect_y < self.board.y:
 			if self.board.cells[rect_y][rect_x] == 0:
-				if self.board.gamer == 'null':
-					self.board.cells[rect_y][rect_x] = 'o'
-					self.board.gamer = 'cross'
-				elif self.board.gamer == 'cross':
-					self.board.cells[rect_y][rect_x] = 'x'
-					self.board.gamer = 'null'
-				if self.board.are_3_in_line():
-					self.game_is_not_over = False
+				self.move(rect_x, rect_y)
 
+	def move(self, rect_x, rect_y):
+		if self.board.gamer == 'null':
+			self.board.cells[rect_y][rect_x] = 'o'
+			self.board.gamer = 'cross'
+		elif self.board.gamer == 'cross':
+			self.board.cells[rect_y][rect_x] = 'x'
+			self.board.gamer = 'null'
+		if self.board.are_3_in_line():
+			self.game_is_not_over = False
 def quit():
 	pygame.quit()
 	sys.exit()
@@ -40,7 +42,7 @@ while True:
 	events = pygame.event.get()
 	for event in events:
 		if event.type == pygame.MOUSEBUTTONUP and main.game_is_not_over:
-			main.click(event)
+			main.click(event.pos)
 		elif event.type == pygame.QUIT:
 			quit()
 		elif event.type == pygame.KEYDOWN:

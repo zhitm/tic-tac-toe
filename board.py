@@ -43,3 +43,5 @@ class Board:
 			for j in range(2, self.x):
 				if all((self.cells[i+2][j-2] == var, self.cells[i+1][j-1] == var, self.cells[i][j] == var)):
 					return True
+		return False
+

@@ -31,7 +31,7 @@ class Board:
 				if all((self.cells[i][j] == var, self.cells[i][j+1] == var, self.cells[i][j+2] == var)):
 					print(1)
 					return True
-		for i in range(self.y -2):
+		for i in range(self.y - 2):
 			for j in range(self.x):
 				if all((self.cells[i][j] == var, self.cells[i+1][j] == var, self.cells[i+2][j] == var)):
 					return True
@@ -39,7 +39,7 @@ class Board:
 			for j in range(self.x - 2):
 				if all((self.cells[i][j] == var, self.cells[i+1][j+1] == var, self.cells[i+2][j+2] == var)):
 					return True
-		for i in range(2, self.y):
+		for i in range(self.y - 2):
 			for j in range(2, self.x):
-				if all((self.cells[i-2][j-2] == var, self.cells[i-1][j-1] == var, self.cells[i][j] == var)):
+				if all((self.cells[i+2][j-2] == var, self.cells[i+1][j-1] == var, self.cells[i][j] == var)):
 					return True

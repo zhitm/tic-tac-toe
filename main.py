@@ -26,11 +26,49 @@ class Main():
 		if self.board.gamer == 'null':
 			self.board.cells[rect_y][rect_x] = 'o'
 			self.board.gamer = 'cross'
+			self.game_is_not_over = 1 - self.board.are_3_in_line('o')
+
 		elif self.board.gamer == 'cross':
 			self.board.cells[rect_y][rect_x] = 'x'
 			self.board.gamer = 'null'
-		if self.board.are_3_in_line():
-			self.game_is_not_over = False
+			self.game_is_not_over = 1 - self.board.are_3_in_line('x')
+		self.ii_move()
+
+
+	def ii_move(self):
+		#ищем, куда походить, чтобы победить за ход
+		for i in range(self.board.y):
+			for j in range(self.board.x):
+				if self.board.cells[i][j] == 0:
+					self.board.cells[i][j] = 'o'
+					if self.board.are_3_in_line('o') == 1:
+						self.board.gamer = 'cross'
+						self.game_is_not_over = False
+						return 0
+					else:
+						self.board.cells[i][j] = 0
+		#мешаю победить противнику
+		for i in range(self.board.y):
+			for j in range(self.board.x):
+				if self.board.cells[i][j] == 0:
+					self.board.cells[i][j] = 'x'
+					if self.board.are_3_in_line('x') == 1:
+						self.board.cells[i][j] = 'o'
+						self.board.gamer = 'cross'
+
+						return 0
+					else:
+						self.board.cells[i][j] = 0
+		#хоть как-то походить надо же
+		for i in range(self.board.y):
+			for j in range(self.board.x):
+				if self.board.cells[i][j] == 0:
+					self.board.cells[i][j] = 'o'
+					self.board.gamer = 'cross'
+
+					return 0
+
+
 def quit():
 	pygame.quit()
 	sys.exit()
@@ -40,7 +78,7 @@ main = Main()
 while True:
 	events = pygame.event.get()
 	for event in events:
-		if event.type == pygame.MOUSEBUTTONUP and main.game_is_not_over:
+		if event.type == pygame.MOUSEBUTTONUP and main.game_is_not_over and main.board.gamer == 'cross':
 			main.click(event.pos)
 		elif event.type == pygame.QUIT:
 			quit()

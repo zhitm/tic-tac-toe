@@ -8,7 +8,7 @@ class Board:
 		self.cell_y = 200
 		self.offset_x = 100
 		self.offset_y = 100
-		self.gamer = 'null'
+		self.gamer = 'cross'
 
 	def draw(self, screen):
 		X = self.cell_x
@@ -25,11 +25,7 @@ class Board:
 					pygame.draw.line(screen, (255, 0, 0),  [self.cell_x*(j+1)+self.offset_x-10, self.cell_y*i+self.offset_y],
 									 [X*j+self.offset_x, Y*(i+1)+self.offset_y-10], 10)
 
-	def are_3_in_line(self):
-		if self.gamer == 'null':
-			var = 'x'
-		else:
-			var = 'o'
+	def are_3_in_line(self, var):
 		for i in range(self.y):
 			for j in range(self.x - 2):
 				if all((self.cells[i][j] == var, self.cells[i][j+1] == var, self.cells[i][j+2] == var)):
